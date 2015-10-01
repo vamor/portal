@@ -3,7 +3,15 @@ header {
     padding: 5px 0px;
 }
 
+.mapDiv{
 
+}
+
+.listDiv{
+    background-color: aliceblue;
+    float: right;
+    height: 100%;
+}
 
 @media screen and (max-width: 765px) {
     .logoImg {

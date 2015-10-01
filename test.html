@@ -41,23 +41,51 @@
 </header>
 
 <div ng-controller="MainCtrl" class="content">
-   <map class="gmaps" center="current-location" zoom="9">
+    <div class="showHideDiv">Click me: <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow"><br/>
+        <div>
+            Show:
+            <div class="check-element animate-hide" ng-show="checked">
+                <span class="glyphicon glyphicon-thumbs-up"></span> I show up when your checkbox is checked.
+            </div>
+        </div>
+        <div>
+            Hide:
+            <div class="check-element animate-hide" ng-hide="checked">
+                <span class="glyphicon glyphicon-thumbs-down"></span> I hide when your checkbox is checked.
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary active">
+            <input type="checkbox" checked> Option 1 (pre-checked)
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox"> Option 2
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox"> Option 3
+        </label>
+    </div>
+   <div class="mapDiv">
+    <map class="gmaps" center="current-location" zoom="9">
         <info-window position="current-location" visible="true">
             <span>My location.</span>
         </info-window>
-
-
     </map>
-    Filter: <input type="search" ng-model="q" placeholder="filter chargepoints..." aria-label="filter chargepoints on any field" />
-    <ul class="example-animate-container">
-        <li class="animate-repeat" ng-repeat="cp in cps| orderBy:'ownerDescr' | filter:q as results" ng-if="cp.ownerDescr">
-            <div ng-class="{'col-xs-1 panel-public': cp.accessability == 'PUBLIC', 'col-xs-1 panel-private': cp.accessability == 'PRIVATE', 'col-xs-1 panel-unknown': cp.accessability == 'UNKNOWN', 'col-xs-1 panel-publiccir': cp.accessability == 'PUBLIC_OPEN_FREE_CIR', 'col-xs-1 default-color': cp.accessability == null}">
-                <br/>
-            </div>
-            <div class="col-xs-11">
-                <h4>{{cp.ownerDescr}} - {{cp.description}}</h4>
-                <h5>{{cp.location.city}}<small> ({{cp.location.postCode}})</small>: {{cp.location.street}} {{cp.location.number}} </h5>
-                <div ng-switch on="cp.state.name" >
+   </div>
+
+   <div class="listDiv">
+       Filter: <input type="search" ng-model="q" placeholder="filter chargepoints..." aria-label="filter chargepoints on any field" />
+       <ul class="example-animate-container">
+           <li class="animate-repeat" ng-repeat="cp in cps| orderBy:'ownerDescr' | filter:q as results" ng-if="cp.ownerDescr">
+               <div ng-class="{'col-xs-1 panel-public': cp.accessability == 'PUBLIC', 'col-xs-1 panel-private': cp.accessability == 'PRIVATE', 'col-xs-1 panel-unknown': cp.accessability == 'UNKNOWN', 'col-xs-1 panel-publiccir': cp.accessability == 'PUBLIC_OPEN_FREE_CIR', 'col-xs-1 default-color': cp.accessability == null}">
+                   <br/>
+               </div>
+               <div class="col-xs-11">
+                   <h4>{{cp.ownerDescr}} - {{cp.description}}</h4>
+                   <h5>{{cp.location.city}}<small> ({{cp.location.postCode}})</small>: {{cp.location.street}} {{cp.location.number}} </h5>
+                   <div ng-switch on="cp.state.name" >
                     <span ng-switch-when="AVAILABLE">
                     available
                     </span>
@@ -67,17 +95,19 @@
                     <span ng-switch-when="UNAVAILABLE">
                         unavailable
                     </span>
-                    <div ng-switch-default>
-                        default div {{cp.state.name}}
-                    </div>
+                       <div ng-switch-default>
+                           default div {{cp.state.name}}
+                       </div>
 
-                </div>
-            </div>
-        </li>
-        <li class="animate-repeat" ng-if="results.length == 0">
-            <strong>No results found...</strong>
-        </li>
-    </ul>
+                   </div>
+               </div>
+           </li>
+           <li class="animate-repeat" ng-if="results.length == 0">
+               <strong>No results found...</strong>
+           </li>
+       </ul>
+
+   </div>
 
 
 
